@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Groovy</title>
+        <link rel="icon" href="./img/favicon/favicon.ico" type="image/x-icon">
+        <link  rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="down">
+                <p>Groovy</p>
+                <div id="buttons">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">LOG IN</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">SIGN UP</button>
+                </div>
+            </div>
+            
+            <!-- Log in modal -->
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-body">
+                            <form>
+                                <label id="labels">Username</label>
+                                <input type="text" id="input" class="form-control">
+                        
+                                <label id="labels">Password</label>
+                                <input type="password" id="input" class="form-control" aria-describedby="forgot-password">
+                                <div id="forgot-password" class="form-text">
+                                    <a class="link" href="#">Forgot your password?</a>
+                                </div>
+                            </form>
+                            <div  id="login_button">
+                                <a href="home.html"><button type="button" class="btn btn-primary">LOG IN</button></a>
+                            </div>
+                            <div id="signup_with"><b>OR LOG IN WITH...</b></div>
+                            <div id="signup_buttons">
+                                <button type="button" class="btn btn-outline-dark">GOOGLE</button>
+                                <button type="button" class="btn btn-outline-dark">APPLE</button>
+                                <button type="button" class="btn btn-outline-dark">FACEBOOK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sing up modal -->
+            <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-body">
+                            <div id="signup_with"><b>SIGN UP WITH...</b></div>
+                            <div id="signup_buttons">
+                                <button type="button" class="btn btn-outline-dark">GOOGLE</button>
+                                <button type="button" class="btn btn-outline-dark">APPLE</button>
+                                <button type="button" class="btn btn-outline-dark">FACEBOOK</button>
+                            </div>
+                            <div id="signup_with"><b>OR SIGN UP WITH...</b></div>
+                            <form>
+                                <div class="row">
+                                    <div class="col">
+                                        <label id="labels">First Name</label>
+                                        <input type="text" id="input" class="form-control">
+                                    </div>
+                                    <div class="col">
+                                        <label id="labels">Last Name</label>
+                                        <input type="password" id="input" class="form-control">
+                                    </div>
+                                </div>
+                                <label id="labels">Email</label>
+                                <input type="email" id="input" class="form-control">
+                              
+                                <label id="labels">Username</label>
+                                <input type="text" id="input" class="form-control">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label id="labels">Password</label>
+                                        <input type="password" id="input" class="form-control">
+                                    </div>
+                                    <div class="col">
+                                        <label id="labels">Confirm Password</label>
+                                        <input type="password" id="input" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label id="labels">Gender</label>
+                                        <div id="gender">
+                                            <div class="form check form-check-inline">
+                                                <input type="radio" class="form-check-input" id="male" name="gender" value="male">
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" id="female" name="gender" value="female">
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                    <div class="col">
+                                        <label id="labels">Date Of Birth</label>
+                                        <input type="date" id="input" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-outline">
+                                    <label for="textbox" id="labels" >Bio</label>
+                                    <textarea class="form-control" id="textbox" rows="3"></textarea>
+                                </div>
+                            </form>
+                            <div  id="login_button">
+                                <button type="button" class="btn btn-primary">SIGN UP</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

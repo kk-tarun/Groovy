@@ -4,8 +4,7 @@
 }
 
 .container-fluid{
-    background: linear-gradient(to right, rgb(3, 20, 87), rgb(31, 34, 119));
-    background-image: url(./img/background/Screenshot\ \(15\).png);
+    background-image: url(./img/background/bg.png);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;

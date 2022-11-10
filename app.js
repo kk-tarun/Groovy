@@ -2,6 +2,7 @@ const musicContainer = document.getElementById('music-container');
 const playBtn = document.getElementById('play');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
+const volume_slider = document.querySelector(".volume_slider");
 
 const audio = document.getElementById('audio');
 const progress = document.getElementById('progress');
@@ -12,411 +13,581 @@ const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
 
 const songs = [
-    'Midnight Rain',
-    'Midnight Rain',
-    'Midnight Rain'
+  'st/Different World/All Falls Down (feat. Juliander)',
+  'st/Different World/Alone',
+  'st/Different World/Darkside',
+  'st/Different World/Diamond Heart',
+  'st/Different World/Different World (feat. CORSAK)',
+  'st/Different World/Do It All for You',
+  'st/Different World/Faded (Interlude)',
+  'st/Different World/Faded',
+  'st/Different World/I Don\'t Wanna Go',
+  'st/Different World/Interlude',
+  'st/Different World/Intro',
+  'st/Different World/Lily',
+  'st/Different World/Lonely (feat. ISÁK & Omar Noir)',
+  'st/Different World/Lost Control',
+  'st/Different World/Sing Me to Sleep',
+
+  'st/Evolve/Yesterday',
+  'st/Evolve/Believer',
+  'st/Evolve/Dancing In The Dark',
+  'st/Evolve/Mouth Of The River',
+  'st/Evolve/Next To Me',
+  'st/Evolve/Rise Up',
+  'st/Evolve/Start Over',
+  'st/Evolve/Thunder',
+  'st/Evolve/Walking The Wire',
+  'st/Evolve/Whatever It Takes',
+
+  'st/FOUR (Deluxe)/Night Changes',
+  'st/FOUR (Deluxe)/No Control',
+  'st/FOUR (Deluxe)/Once in a Lifetime',
+  'st/FOUR (Deluxe)/Ready to Run',
+  'st/FOUR (Deluxe)/Spaces',
+  'st/FOUR (Deluxe)/Steal My Girl',
+  'st/FOUR (Deluxe)/Stockholm Syndrome',
+  'st/FOUR (Deluxe)/Where Do Broken Hearts Go',
+  'st/FOUR (Deluxe)/18',
+  'st/FOUR (Deluxe)/Act My Age',
+  'st/FOUR (Deluxe)/Change Your Ticket',
+  'st/FOUR (Deluxe)/Clouds',
+  'st/FOUR (Deluxe)/Fireproof',
+  'st/FOUR (Deluxe)/Girl Almighty',
+  'st/FOUR (Deluxe)/Illusion',
+
+  'st/Midnights/Maroon',
+  'st/Midnights/Midnight Rain',
+  'st/Midnights/Snow On The Beach (feat. Lana Del Rey)',
+  'st/Midnights/Anti-Hero',
+  'st/Midnights/Lavender Haze',
+  'st/Midnights/Lover',
+  'st/Midnights/Miss Americana & The Heartbreak Prince',
+  'st/Midnights/Paper Rings',
+  'st/Midnights/The Archer',
+  'st/Midnights/The Man',
+  'st/Midnights/Cornelia Street',
+  'st/Midnights/Cruel Summer',
+  'st/Midnights/Death By A Thousand Cuts',
+  'st/Midnights/I Forgot That You Existed',
+  'st/Midnights/I Think He Knows',
+  'st/Midnights/London Boy',
+
+  'st/Mind Of Mine (Deluxe Edition)/BeFoUr',
+  'st/Mind Of Mine (Deluxe Edition)/BLUE',
+  'st/Mind Of Mine (Deluxe Edition)/BoRdErSz',
+  'st/Mind Of Mine (Deluxe Edition)/BRIGHT',
+  'st/Mind Of Mine (Deluxe Edition)/dRuNk',
+  'st/Mind Of Mine (Deluxe Edition)/fOoL fOr YoU',
+  'st/Mind Of Mine (Deluxe Edition)/LIKE I WOULD',
+  'st/Mind Of Mine (Deluxe Edition)/lUcOzAdE',
+  'st/Mind Of Mine (Deluxe Edition)/MiNd Of MiNdd (Intro)',
+  'st/Mind Of Mine (Deluxe Edition)/PILLOWTALK',
+  'st/Mind Of Mine (Deluxe Edition)/rEaR vIeW',
+  'st/Mind Of Mine (Deluxe Edition)/sHe',
+  'st/Mind Of Mine (Deluxe Edition)/TiO',
+  'st/Mind Of Mine (Deluxe Edition)/tRuTh',
+  'st/Mind Of Mine (Deluxe Edition)/wRoNg (feat. Kehlani)',
+
+  'st/Proof/Blood Sweat & Tears',
+  'st/Proof/Born Singer',
+  'st/Proof/Boy With Luv (Feat. Halsey)',
+  'st/Proof/Butter',
+  'st/Proof/DNA',
+  'st/Proof/Dynamite',
+  'st/Proof/Euphoria',
+  'st/Proof/FAKE LOVE',
+  'st/Proof/Filter',
+  'st/Proof/IDOL',
+  'st/Proof/Life Goes On',
+  'st/Proof/ON',
+  'st/Proof/RUN',
+  'st/Proof/Singularity',
+  'st/Proof/Yet To Come',
+
+  'st/SOUR/1 step forward, 3 steps back',
+  'st/SOUR/brutal',
+  'st/SOUR/deja vu',
+  'st/SOUR/drivers license',
+  'st/SOUR/enough for you',
+  'st/SOUR/favorite crime',
+  'st/SOUR/good 4 u',
+  'st/SOUR/happier',
+  'st/SOUR/hope ur ok',
+  'st/SOUR/jealousy, jealousy',
+  'st/SOUR/traitor',
+  'st/SOUR/I Think I Kinda, You Know - Duet',
+  'st/SOUR/Just for a Moment',
+  'st/SOUR/Start of Something New',
+  'st/SOUR/The Rose Song',
+  'st/SOUR/Wondering',
+  'st/SOUR/All I Want',
+  'st/SOUR/Even When The Best Part',
+
 ];
 
-let songIndex = 2;
+const favoriteArtists = {
+  "bts": [
+    'st/Proof/Blood Sweat & Tears',
+    'st/Proof/Born Singer',
+    'st/Proof/Boy With Luv (Feat. Halsey)',
+    'st/Proof/Butter',
+    'st/Proof/DNA',
+    'st/Proof/Dynamite',
+    'st/Proof/Euphoria',
+    'st/Proof/FAKE LOVE',
+    'st/Proof/Filter',
+    'st/Proof/IDOL',
+    'st/Proof/Life Goes On',
+    'st/Proof/ON',
+    'st/Proof/RUN',
+    'st/Proof/Singularity',
+    'st/Proof/Yet To Come',
+  ],
 
-loadSong(songs[songIndex]);
+  "oneDirection": [
+    'st/FOUR (Deluxe)/Night Changes',
+    'st/FOUR (Deluxe)/No Control',
+    'st/FOUR (Deluxe)/Once in a Lifetime',
+    'st/FOUR (Deluxe)/Ready to Run',
+    'st/FOUR (Deluxe)/Spaces',
+    'st/FOUR (Deluxe)/Steal My Girl',
+    'st/FOUR (Deluxe)/Stockholm Syndrome',
+    'st/FOUR (Deluxe)/Where Do Broken Hearts Go',
+    'st/FOUR (Deluxe)/18',
+    'st/FOUR (Deluxe)/Act My Age',
+    'st/FOUR (Deluxe)/Change Your Ticket',
+    'st/FOUR (Deluxe)/Clouds',
+    'st/FOUR (Deluxe)/Fireproof',
+    'st/FOUR (Deluxe)/Girl Almighty',
+    'st/FOUR (Deluxe)/Illusion',
+  ],
+
+  "taylorSwift": [
+    'st/Midnights/Maroon',
+    'st/Midnights/Midnight Rain',
+    'st/Midnights/Snow On The Beach (feat. Lana Del Rey)',
+    'st/Midnights/Anti-Hero',
+    'st/Midnights/Lavender Haze',
+    'st/Midnights/Lover',
+    'st/Midnights/Miss Americana & The Heartbreak Prince',
+    'st/Midnights/Paper Rings',
+    'st/Midnights/The Archer',
+    'st/Midnights/The Man',
+    'st/Midnights/Cornelia Street',
+    'st/Midnights/Cruel Summer',
+    'st/Midnights/Death By A Thousand Cuts',
+    'st/Midnights/I Forgot That You Existed',
+    'st/Midnights/I Think He Knows',
+    'st/Midnights/London Boy',
+  ],
+
+  "oliviaRodrigo": [
+    'st/SOUR/1 step forward, 3 steps back',
+    'st/SOUR/brutal',
+    'st/SOUR/deja vu',
+    'st/SOUR/drivers license',
+    'st/SOUR/enough for you',
+    'st/SOUR/favorite crime',
+    'st/SOUR/good 4 u',
+    'st/SOUR/happier',
+    'st/SOUR/hope ur ok',
+    'st/SOUR/jealousy, jealousy',
+    'st/SOUR/traitor',
+    'st/SOUR/I Think I Kinda, You Know - Duet',
+    'st/SOUR/Just for a Moment',
+    'st/SOUR/Start of Something New',
+    'st/SOUR/The Rose Song',
+    'st/SOUR/Wondering',
+    'st/SOUR/All I Want',
+    'st/SOUR/Even When The Best Part',
+  ],
+
+  "zaynMalik": [
+    'st/Mind Of Mine (Deluxe Edition)/BeFoUr',
+    'st/Mind Of Mine (Deluxe Edition)/BLUE',
+    'st/Mind Of Mine (Deluxe Edition)/BoRdErSz',
+    'st/Mind Of Mine (Deluxe Edition)/BRIGHT',
+    'st/Mind Of Mine (Deluxe Edition)/dRuNk',
+    'st/Mind Of Mine (Deluxe Edition)/fOoL fOr YoU',
+    'st/Mind Of Mine (Deluxe Edition)/LIKE I WOULD',
+    'st/Mind Of Mine (Deluxe Edition)/lUcOzAdE',
+    'st/Mind Of Mine (Deluxe Edition)/MiNd Of MiNdd (Intro)',
+    'st/Mind Of Mine (Deluxe Edition)/PILLOWTALK',
+    'st/Mind Of Mine (Deluxe Edition)/rEaR vIeW',
+    'st/Mind Of Mine (Deluxe Edition)/sHe',
+    'st/Mind Of Mine (Deluxe Edition)/TiO',
+    'st/Mind Of Mine (Deluxe Edition)/tRuTh',
+    'st/Mind Of Mine (Deluxe Edition)/wRoNg (feat. Kehlani)',
+  ],
+
+  "alanWalker": [
+    'st/Different World/All Falls Down (feat. Juliander)',
+    'st/Different World/Alone',
+    'st/Different World/Darkside',
+    'st/Different World/Diamond Heart',
+    'st/Different World/Different World (feat. CORSAK)',
+    'st/Different World/Do It All for You',
+    'st/Different World/Faded (Interlude)',
+    'st/Different World/Faded',
+    'st/Different World/I Don\'t Wanna Go',
+    'st/Different World/Interlude',
+    'st/Different World/Intro',
+    'st/Different World/Lily',
+    'st/Different World/Lonely (feat. ISÁK & Omar Noir)',
+    'st/Different World/Lost Control',
+    'st/Different World/Sing Me to Sleep',
+  ]
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+shuffle(songs);
+let songIndex = Math.floor(Math.random() * songs.length)
+loadSong(songs[songIndex])
 
 function loadSong(song) {
-  title.innerText = song;
-  audio.src = `${song}.mp3`;
-  cover.src = `./artists/${song}.jpg`;
+  pauseSong()
+  var ans = song.split('/')
+  var songTitle = ans[ans.length - 1]
+  title.innerText = songTitle
+  audio.src = `${song}.mp3`
+
+  var songAlbum = ans[ans.length - 2];
+  if (songAlbum === "SOUR") {
+    cover.src = `artists/oliviaRodrigo.jpg`;
+    document.getElementById("albumCover").style.backgroundImage = "url(artists/oliviaRodrigo.jpg)";
+  }
+  else if (songAlbum === "Proof") {
+    cover.src = `artists/bts.jpg`;
+    document.getElementById("albumCover").style.backgroundImage = "url(artists/bts.jpg)";
+  }
+  else if (songAlbum === "Mind Of Mine (Deluxe Edition)") {
+    cover.src = `artists/zayn2.jpg`;
+    document.getElementById("albumCover").style.backgroundImage = "url(artists/zayn2.jpg)";
+  }
+  else if (songAlbum === "Midnights") {
+    cover.src = `artists/taylorSwift.jpg`;
+    document.getElementById("albumCover").style.backgroundImage = "url(artists/taylorSwift.jpg)";
+  }
+  else if (songAlbum === "Evolve") {
+    cover.src = `artists/imagineDragon.jpg`;
+    document.getElementById("albumCover").style.backgroundImage = "url(artists/imagineDragon.jpg)";
+  }
+  else if (songAlbum === "FOUR (Deluxe)") {
+    cover.src = `artists/oneDirection.jpg`;
+    document.getElementById("albumCover").style.backgroundImage = "url(artists/oneDirection.jpg)";
+  }
+  else if (songAlbum === "Different World") {
+    cover.src = `artists/alanWalker.jpg`;
+    document.getElementById("albumCover").style.backgroundImage = "url(artists/alanWalker.jpg)";
+  }
 }
 
 playBtn.addEventListener('click', () => {
-    const isPlaying = musicContainer.classList.contains('play');
-  
-    if (isPlaying) {
-      pauseSong();
-    } else {
-      playSong();
-    }
-  });
+  const isPlaying = musicContainer.classList.contains('play');
 
-  function playSong() {
-    musicContainer.classList.add('play');
-    playBtn.querySelector('i.fas').classList.remove('fa-play');
-    playBtn.querySelector('i.fas').classList.add('fa-pause');
-  
-    audio.play();
+  if (isPlaying) {
+    pauseSong();
+  } else {
+    playSong();
   }
+});
 
-  function pauseSong() {
-    musicContainer.classList.remove('play');
-    playBtn.querySelector('i.fas').classList.add('fa-play');
-    playBtn.querySelector('i.fas').classList.remove('fa-pause');
-  
-    audio.pause();
-  }
+function playSong() {
+  musicContainer.classList.add('play');
+  playBtn.querySelector('i.fas').classList.remove('fa-play');
+  playBtn.querySelector('i.fas').classList.add('fa-pause');
 
-  prevBtn.addEventListener('click', prevSong);
+  audio.play();
+}
+
+function pauseSong() {
+  musicContainer.classList.remove('play');
+  playBtn.querySelector('i.fas').classList.add('fa-play');
+  playBtn.querySelector('i.fas').classList.remove('fa-pause');
+
+  audio.pause();
+}
+
+prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 
 function prevSong() {
-    songIndex--;
+  songIndex--;
 
-    if (songIndex < 0) {
-      songIndex = songs.length - 1;
-    }
-
-    loadSong(songs[songIndex]);
-
-    playSong();
+  if (songIndex < 0) {
+    songIndex = songs.length - 1;
+  }
+  loadSong(songs[songIndex]);
+  playSong();
 }
 
 function nextSong() {
-    songIndex++;
-  
-    if (songIndex > songs.length - 1) {
-      songIndex = 0;
-    }
-  
-    loadSong(songs[songIndex]);
-  
-    playSong();
+  songIndex++;
+
+  if (songIndex > songs.length - 1) {
+    songIndex = 0;
   }
-
-  audio.addEventListener('timeupdate', updateProgress);
-
-  function updateProgress(e) {
-    const { duration, currentTime } = e.srcElement;
-    const progressPercent = (currentTime / duration) * 100;
-    progress.style.width = `${progressPercent}%`;
-  }
-
-  progressContainer.addEventListener('click', setProgress);
-
-  function setProgress(e) {
-    const width = this.clientWidth;
-    const clickX = e.offsetX;
-    const duration = audio.duration;
-  
-    audio.currentTime = (clickX / width) * duration;
-  }
-
-  audio.addEventListener('ended', nextSong);
-
-const music = new Audio('vande.mp3');
-
-const Songs = [
-    {
-        id:'1',
-        songName:` On My Way <br>
-        <div class="subtitle">Alan Walker</div>`,
-        poster: "img/1.jpg"
-    },
-    {
-        id:'2',
-        songName:` Alan Walker-Fade <br>
-        <div class="subtitle">Alan Walker</div>`,
-        poster: "img/2.jpg"
-    },
-    {
-        id:"3",
-        songName: `Cartoon - On & On <br><div class="subtitle"> Daniel Levi</div>`,
-        poster: "img/3.jpg",
-    },
-    {
-        id:"4",
-        songName: `Warriyo - Mortals <br><div class="subtitle">Mortals</div>`,
-        poster: "img/4.jpg",
-    },
-    {
-        id:"5",
-        songName: `Ertugrul Gazi <br><div class="subtitle">Ertugrul</div>`,
-        poster: "img/5.jpg",
-    },
-    {
-        id:"6",
-        songName: `Electronic Music <br><div class="subtitle">Electro</div>`,
-        poster: "img/6.jpg",
-    },
-    {
-        id:"7",
-        songName: `Agar Tum Sath Ho <br><div class="subtitle">Tamashaa</div>`,
-        poster: "img/7.jpg",
-    },
-    {
-        id:"8",
-        songName: `Suna Hai <br><div class="subtitle">Neha Kakker</div>`,
-        poster: "img/8.jpg",
-    },
-    {
-        id:"9",
-        songName: `Dilber <br><div class="subtitle">Satyameva Jayate</div>`,
-        poster: "img/9.jpg",
-    },
-    {
-        id:"10",
-        songName: `Duniya <br><div class="subtitle">Luka Chuppi</div>`,
-        poster: "img/10.jpg",
-    },
-    {
-        id:"11",
-        songName: `Lagdi Lahore Di <br><div class="subtitle">Street Dancer 3D</div>`,
-        poster: "img/11.jpg",
-    },
-    {
-        id:"12",
-        songName: `Putt Jatt Da <br><div class="subtitle">Putt Jatt Da</div>`,
-        poster: "img/12.jpg",
-    },
-    {
-        id:"13",
-        songName: `Baarishein <br><div class="subtitle">Atif Aslam</div>`,
-        poster: "img/13.jpg",
-    },
-    {
-        id:"14",
-        songName: `Vaaste <br><div class="subtitle">Dhvani Bhanushali</div>`,
-        poster: "img/14.jpg",
-    },
-    {
-        id:"15",
-        songName: `Lut Gaye <br><div class="subtitle">Jubin Nautiyal</div>`,
-        poster: "img/15.jpg",
-    },
-    {
-        id:"16",
-        songName: `Lut Gaye <br><div class="subtitle">Jubin Nautiyal</div>`,
-        poster: "img/15.jpg",
-    },
-    {
-        id:"17",
-        songName: `Lut Gaye <br><div class="subtitle">Jubin Nautiyal</div>`,
-        poster: "img/15.jpg",
-    }
-]
-
-
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
+  loadSong(songs[songIndex]);
+  playSong();
 }
 
-Array.from(document.getElementsByClassName('songItem')).forEach((element, i)=>{
-    console.log(Songs[i].poster);
-    shuffle(Songs);
-    element.getElementsByTagName('img')[0].src = Songs[i].poster;
-    element.getElementsByTagName('h5')[0].innerHTML = Songs[i].songName;
+audio.addEventListener('timeupdate', updateProgress);
+
+function updateProgress(e) {
+  const { duration, currentTime } = e.srcElement;
+  const progressPercent = (currentTime / duration) * 100;
+  progress.style.width = `${progressPercent}%`;
+}
+
+progressContainer.addEventListener('click', setProgress);
+
+function setProgress(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const duration = audio.duration;
+
+  audio.currentTime = (clickX / width) * duration;
+}
+
+audio.addEventListener('ended', nextSong);
+
+// Loads Songs to playlist
+Array.from(document.getElementsByClassName('songItem')).forEach((element, i) => {
+  var ans = songs[i].split('/')
+  var songTitle = ans[ans.length - 1]
+  title.innerText = songTitle
+  element.getElementsByTagName('h5')[0].innerText = songTitle;
+
+  var songAlbum = ans[ans.length - 2];
+  if (songAlbum === "SOUR") {
+    element.getElementsByTagName('img')[0].src = `artists/oliviaRodrigo.jpg`;
+  }
+  else if (songAlbum === "Proof") {
+    element.getElementsByTagName('img')[0].src = `artists/bts.jpg`;
+  }
+  else if (songAlbum === "Mind Of Mine (Deluxe Edition)") {
+    element.getElementsByTagName('img')[0].src = `artists/zayn2.jpg`;
+  }
+  else if (songAlbum === "Midnights") {
+    element.getElementsByTagName('img')[0].src = `artists/taylorSwift.jpg`;
+  }
+  else if (songAlbum === "Evolve") {
+    element.getElementsByTagName('img')[0].src = `artists/imagineDragon.jpg`;
+  }
+  else if (songAlbum === "FOUR (Deluxe)") {
+    element.getElementsByTagName('img')[0].src = `artists/oneDirection.jpg`;
+  }
+  else if (songAlbum === "Different World") {
+    element.getElementsByTagName('img')[0].src = `artists/alanWalker.jpg`;
+  }
+
+  element.addEventListener('click', () => {
+    songIndex = i
+    loadSong(songs[i])
+    playSong();
+  })
+  songIndex = 0
+  loadSong(songs[songIndex])
+})
+
+//favourite artist songs
+//BTS
+document.getElementsByClassName('bts')[0].addEventListener('click', () => {
+  shuffle(favoriteArtists.bts);
+
+  Array.from(document.getElementsByClassName('songItem')).forEach((element, i) => {
+
+    songs[i] = favoriteArtists.bts[i]
+    var ans = favoriteArtists.bts[i].split('/')
+    var songTitle = ans[ans.length - 1]
+    title.innerText = songTitle
+    element.getElementsByTagName('h5')[0].innerText = songTitle;
+
+    var songAlbum = ans[ans.length - 2];
+    if (songAlbum === "Proof") {
+      element.getElementsByTagName('img')[0].src = `artists/bts.jpg`;
+    }
+
+    element.addEventListener('click', () => {
+      songIndex = i
+      loadSong(favoriteArtists.bts[i])
+      playSong();
+    })
+  })
+  songIndex = 0
+  loadSong(songs[songIndex])
+})
+
+//One Direction
+document.getElementsByClassName('oneDirection')[0].addEventListener('click', () => {
+  shuffle(favoriteArtists.oneDirection);
+
+  Array.from(document.getElementsByClassName('songItem')).forEach((element, i) => {
+
+    songs[i] = favoriteArtists.oneDirection[i]
+    var ans = favoriteArtists.oneDirection[i].split('/')
+    var songTitle = ans[ans.length - 1]
+    title.innerText = songTitle
+    element.getElementsByTagName('h5')[0].innerText = songTitle;
+
+    var songAlbum = ans[ans.length - 2];
+    if (songAlbum === "FOUR (Deluxe)") {
+      element.getElementsByTagName('img')[0].src = `artists/oneDirection.jpg`;
+    }
+
+    element.addEventListener('click', () => {
+      songIndex = i
+      loadSong(favoriteArtists.oneDirection[i])
+      playSong();
+    })
+  })
+  songIndex = 0
+  loadSong(songs[songIndex])
+})
+
+//Taylor Swift
+document.getElementsByClassName('taylorSwift')[0].addEventListener('click', () => {
+  shuffle(favoriteArtists.taylorSwift);
+
+  Array.from(document.getElementsByClassName('songItem')).forEach((element, i) => {
+
+    songs[i] = favoriteArtists.taylorSwift[i]
+    var ans = favoriteArtists.taylorSwift[i].split('/')
+    var songTitle = ans[ans.length - 1]
+    title.innerText = songTitle
+    element.getElementsByTagName('h5')[0].innerText = songTitle;
+
+    var songAlbum = ans[ans.length - 2];
+    if (songAlbum === "Midnights") {
+      element.getElementsByTagName('img')[0].src = `artists/taylorSwift.jpg`;
+    }
+
+    element.addEventListener('click', () => {
+      songIndex = i
+      loadSong(favoriteArtists.taylorSwift[i])
+      playSong();
+    })
+  })
+  songIndex = 0
+  loadSong(songs[songIndex])
+})
+
+//Olivia Rodrigo
+document.getElementsByClassName('oliviaRodrigo')[0].addEventListener('click', () => {
+  shuffle(favoriteArtists.oliviaRodrigo);
+
+  Array.from(document.getElementsByClassName('songItem')).forEach((element, i) => {
+    songs[i] = favoriteArtists.oliviaRodrigo[i]
+    var ans = favoriteArtists.oliviaRodrigo[i].split('/')
+    var songTitle = ans[ans.length - 1]
+    title.innerText = songTitle
+    element.getElementsByTagName('h5')[0].innerText = songTitle;
+
+    var songAlbum = ans[ans.length - 2];
+    if (songAlbum === "SOUR") {
+      element.getElementsByTagName('img')[0].src = `artists/oliviaRodrigo.jpg`;
+    }
+
+    element.addEventListener('click', () => {
+      songIndex = i
+      loadSong(favoriteArtists.oliviaRodrigo[i])
+      playSong();
+    })
+  })
+  songIndex = 0
+  loadSong(songs[songIndex])
+})
+
+//Zayn Malik
+document.getElementsByClassName('zaynMalik')[0].addEventListener('click', () => {
+  shuffle(favoriteArtists.zaynMalik);
+
+  Array.from(document.getElementsByClassName('songItem')).forEach((element, i) => {
+
+    songs[i] = favoriteArtists.zaynMalik[i]
+    var ans = favoriteArtists.zaynMalik[i].split('/')
+    var songTitle = ans[ans.length - 1]
+    title.innerText = songTitle
+    element.getElementsByTagName('h5')[0].innerText = songTitle;
+
+    var songAlbum = ans[ans.length - 2];
+    if (songAlbum === "Mind Of Mine (Deluxe Edition)") {
+      element.getElementsByTagName('img')[0].src = `artists/zayn2.jpg`;
+    }
+
+    element.addEventListener('click', () => {
+      songIndex = i
+      loadSong(favoriteArtists.zaynMalik[i])
+      playSong();
+    })
+  })
+  songIndex = 0
+  loadSong(songs[songIndex])
+})
+
+//Alan Walker
+document.getElementsByClassName('alanWalker')[0].addEventListener('click', () => {
+  shuffle(favoriteArtists.alanWalker);
+  var length = favoriteArtists.alanWalker.length;
+
+  Array.from(document.getElementsByClassName('songItem')).forEach((element, i) => {
+
+    songs[i] = favoriteArtists.alanWalker[i]
+    var ans = favoriteArtists.alanWalker[i].split('/')
+    var songTitle = ans[ans.length - 1]
+    title.innerText = songTitle
+    element.getElementsByTagName('h5')[0].innerText = songTitle;
+
+    var songAlbum = ans[ans.length - 2];
+    if (songAlbum === "Different World") {
+      element.getElementsByTagName('img')[0].src = `artists/alanWalker.jpg`;
+    }
+
+    element.addEventListener('click', () => {
+      songIndex = i
+      loadSong(favoriteArtists.alanWalker[i])
+      playSong();
+    })
+  })
+  songIndex = 0
+  loadSong(songs[songIndex])
 })
 
 
-// let masterPlay = document.getElementById('masterPlay');
-// let wave = document.getElementsByClassName('wave')[0];
+//Last Listening
+document.getElementById("lastListening").addEventListener('click', () => {
+  prevSong();
+})
 
-// masterPlay.addEventListener('click',()=>{
-//     if (music.paused || music.currentTime <=0) {
-//         music.play();
-//         masterPlay.classList.remove('bi-play-fill');
-//         masterPlay.classList.add('bi-pause-fill');
-//         wave.classList.add('active2');
-//     } else {
-//         music.pause();
-//         masterPlay.classList.add('bi-play-fill');
-//         masterPlay.classList.remove('bi-pause-fill');
-//         wave.classList.remove('active2');
-//     }
-// } )
+//Search Function
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
 
+function filterFunction() {
+  var input, filter, a, i;
+  input = document.getElementById("searchbar");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
 
-// const makeAllPlays = () =>{
-//     Array.from(document.getElementsByClassName('playListPlay')).forEach((element)=>{
-//             element.classList.add('bi-play-circle-fill');
-//             element.classList.remove('bi-pause-circle-fill');
-//     })
-// }
-// const makeAllBackgrounds = () =>{
-//     Array.from(document.getElementsByClassName('songItem')).forEach((element)=>{
-//             element.style.background = "rgb(105, 105, 170, 0)";
-//     })
-// }
-
-// let index = 0;
-// let poster_master_play = document.getElementById('poster_master_play');
-// let title = document.getElementById('title');
-// Array.from(document.getElementsByClassName('playListPlay')).forEach((element)=>{
-//     element.addEventListener('click', (e)=>{
-//         index = e.target.id;
-//         makeAllPlays();
-//         e.target.classList.remove('bi-play-circle-fill');
-//         e.target.classList.add('bi-pause-circle-fill');
-//         music.src = `audio/${index}.mp3`;
-//         poster_master_play.src =`img/${index}.jpg`;
-//         music.play();
-//         let song_title = songs.filter((ele)=>{
-//             return ele.id == index;
-//         })
-
-//         song_title.forEach(ele =>{
-//             let {songName} = ele;
-//             title.innerHTML = songName;
-//         })
-//         masterPlay.classList.remove('bi-play-fill');
-//         masterPlay.classList.add('bi-pause-fill');
-//         wave.classList.add('active2');
-//         music.addEventListener('ended',()=>{
-//             masterPlay.classList.add('bi-play-fill');
-//             masterPlay.classList.remove('bi-pause-fill');
-//             wave.classList.remove('active2');
-//         })
-//         makeAllBackgrounds();
-//         Array.from(document.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
-//     })
-// })
-
-
-// let currentStart = document.getElementById('currentStart');
-// let currentEnd = document.getElementById('currentEnd');
-// let seek = document.getElementById('seek');
-// let bar2 = document.getElementById('bar2');
-// let dot = document.getElementsByClassName('dot')[0];
-
-// music.addEventListener('timeupdate',()=>{
-//     let music_curr = music.currentTime;
-//     let music_dur = music.duration;
-
-//     let min = Math.floor(music_dur/60);
-//     let sec = Math.floor(music_dur%60);
-//     if (sec<10) {
-//         sec = `0${sec}`
-//     }
-//     currentEnd.innerText = `${min}:${sec}`;
-
-//     let min1 = Math.floor(music_curr/60);
-//     let sec1 = Math.floor(music_curr%60);
-//     if (sec1<10) {
-//         sec1 = `0${sec1}`
-//     }
-//     currentStart.innerText = `${min1}:${sec1}`;
-
-//     let progressbar = parseInt((music.currentTime/music.duration)*100);
-//     seek.value = progressbar;
-//     let seekbar = seek.value;
-//     bar2.style.width = `${seekbar}%`;
-//     dot.style.left = `${seekbar}%`;
-// })
-
-// seek.addEventListener('change', ()=>{
-//     music.currentTime = seek.value * music.duration/100;
-// })
-
-// music.addEventListener('ended', ()=>{
-//     masterPlay.classList.add('bi-play-fill');
-//     masterPlay.classList.remove('bi-pause-fill');
-//     wave.classList.remove('active2');
-// })
-
-
-// let vol_icon = document.getElementById('vol_icon');
-// let vol = document.getElementById('vol');
-// let vol_dot = document.getElementById('vol_dot');
-// let vol_bar = document.getElementsByClassName('vol_bar')[0];
-
-// vol.addEventListener('change', ()=>{
-//     if (vol.value == 0) {
-//         vol_icon.classList.remove('bi-volume-down-fill');
-//         vol_icon.classList.add('bi-volume-mute-fill');
-//         vol_icon.classList.remove('bi-volume-up-fill');
-//     }
-//     if (vol.value > 0) {
-//         vol_icon.classList.add('bi-volume-down-fill');
-//         vol_icon.classList.remove('bi-volume-mute-fill');
-//         vol_icon.classList.remove('bi-volume-up-fill');
-//     }
-//     if (vol.value > 50) {
-//         vol_icon.classList.remove('bi-volume-down-fill');
-//         vol_icon.classList.remove('bi-volume-mute-fill');
-//         vol_icon.classList.add('bi-volume-up-fill');
-//     }
-
-//     let vol_a = vol.value;
-//     vol_bar.style.width = `${vol_a}%`;
-//     vol_dot.style.left = `${vol_a}%`;
-//     music.volume = vol_a/100;
-// })
-
-
-
-// let back = document.getElementById('back');
-// let next = document.getElementById('next');
-
-// back.addEventListener('click', ()=>{
-//     index -= 1;
-//     if (index < 1) {
-//         index = Array.from(document.getElementsByClassName('songItem')).length;
-//     }
-//     music.src = `audio/${index}.mp3`;
-//     poster_master_play.src =`img/${index}.jpg`;
-//     music.play();
-//     let song_title = songs.filter((ele)=>{
-//         return ele.id == index;
-//     })
-
-//     song_title.forEach(ele =>{
-//         let {songName} = ele;
-//         title.innerHTML = songName;
-//     })
-//     makeAllPlays()
-
-//     document.getElementById(`${index}`).classList.remove('bi-play-fill');
-//     document.getElementById(`${index}`).classList.add('bi-pause-fill');
-//     makeAllBackgrounds();
-//     Array.from(document.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
-    
-// })
-// next.addEventListener('click', ()=>{
-//     index -= 0;
-//     index += 1;
-//     if (index > Array.from(document.getElementsByClassName('songItem')).length) {
-//         index = 1;
-//         }
-//     music.src = `audio/${index}.mp3`;
-//     poster_master_play.src =`img/${index}.jpg`;
-//     music.play();
-//     let song_title = songs.filter((ele)=>{
-//         return ele.id == index;
-//     })
-
-//     song_title.forEach(ele =>{
-//         let {songName} = ele;
-//         title.innerHTML = songName;
-//     })
-//     makeAllPlays()
-
-//     document.getElementById(`${index}`).classList.remove('bi-play-fill');
-//     document.getElementById(`${index}`).classList.add('bi-pause-fill');
-//     makeAllBackgrounds();
-//     Array.from(document.getElementsByClassName('songItem'))[`${index-1}`].style.background = "rgb(105, 105, 170, .1)";
-    
-// })
-
-
-// let left_scroll = document.getElementById('left_scroll');
-// let right_scroll = document.getElementById('right_scroll');
-// let pop_song = document.getElementsByClassName('pop_song')[0];
-
-// left_scroll.addEventListener('click', ()=>{
-//     pop_song.scrollLeft -= 330;
-// })
-// right_scroll.addEventListener('click', ()=>{
-//     pop_song.scrollLeft += 330;
-// })
-
-
-// let left_scrolls = document.getElementById('left_scrolls');
-// let right_scrolls = document.getElementById('right_scrolls');
-// let item = document.getElementsByClassName('item')[0];
-
-// left_scrolls.addEventListener('click', ()=>{
-//     item.scrollLeft -= 330;
-// })
-// right_scrolls.addEventListener('click', ()=>{
-//     item.scrollLeft += 330;
-// })
+//Volume Control Function
+function setVolume() {
+  audio.volume = volume_slider.value / 100;
+}

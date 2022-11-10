@@ -34,10 +34,10 @@ body {
 .player .div2 .title{
     color: cyan;
     font-family: hello;
-    font-size: 60px;
+    font-size: 80px;
     font-weight: 600;
     text-align: center;
-    margin-top: 16px;
+    margin-top: 10px;
 }
 
 .div1{
@@ -63,6 +63,8 @@ body {
 
 .div1 .search input{
     background-color: transparent;
+    width: 320px;
+    height: 20px;
     border: none;
     outline: none;
     color: white;
@@ -86,51 +88,20 @@ body {
     border: 1px solid rgba(239, 207, 207, 0.125);
 }
 
-.wave{
-    width: 100px;
-    height: 200px;
-    /* border: 1px solid #fff; */
-    padding-bottom: 5px;
-    display: flex;
-    align-items: flex-end;
-    margin-right: 10px;
-}
-.wave1{
-    width: 30px;
-    height: 100px;
-    margin-right: 3px ;
-    border-radius: 10px 10px 0px 0px ;
-    background: cyan;
-    animation: unset;
-    /* animation: wave 0.5 linear infinite; */
-}
-.wave1:nth-child(2){
-    height: 130px;
-}
-.wave1:nth-child(3){
-    height: 80px;
-}
-/* javascript class wave  */
-.wave1{
-    animation: wave 0.75s linear infinite;
-}
-.wave1:nth-child(2){
-    animation-delay: .4s;
-}
-.wave1:nth-child(3){
-    animation-delay: .8s;
-}
-
-@keyframes wave {
-    0%{
-        height: 100px;
-    }
-    50%{
-        height: 150px;
-    }
-    100%{
-        height: 100px;
-    }
+#albumCover{
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: color;
+    border-radius: 10px;
+    opacity: 0.75;
+    box-shadow: 10px 10px 100px black,
+                -10px -10px 100px black,
+                10px 10px 100px black inset,
+                10px 10px 100px black inset;
+    height: 500px;
+    width: 400px;
+    margin: 30px 0px 0px 0px;
 }
 
 .playlist {
@@ -148,7 +119,7 @@ body {
     transition: .3s linear;
 }
 .playlist h4:hover {
-    color: #fff;
+    color: rgb(255, 255, 255);
 }
 .playlist h4 span{
     position: relative;
@@ -183,9 +154,7 @@ body {
 
 .menu_song {
     width: 100%;
-    height: 80%;
-    /* border: 1px solid #fff; */
-    /* margin-top: 10px; */
+    height: 84%;
     overflow: auto;
     padding: 10px;
 }
@@ -212,11 +181,14 @@ body {
     width: 32px;
     height: 32px;
     margin-left: 25px;
+    border-radius: 5px;
 }
 .menu_song li h5{
     font-size: 14px;
     margin-left: 15px;
     color: white;
+    padding-right: 40px;
+    text-transform: capitalize;
 }
 .menu_song li h5 span{
     overflow-x: hidden;
@@ -248,9 +220,62 @@ body {
     background: rgb(255, 255, 255); 
 }
 
+/* Volume Slider */
+.slider_container {
+    width: 75%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+  }
+   
+  /* Modify the appearance of the slider */
+  .volume_slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 5px;
+    background: #16e9df;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 10px;
+  }
+
+  .volume_slider:active{
+    border: none;
+  }
+   
+  /* Modify the appearance of the slider thumb */
+  .volume_slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: white;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+   
+  /* Change the opacity when mouse is hovered */
+  .volume_slider:hover {
+    opacity: 1.0;
+  }
+   
+  .volume_slider {
+    width: 50%;
+  }
+   
+  i.fa-volume-down,
+  i.fa-volume-up {
+    color: white;
+    padding: 10px;
+  }
+
 
 .div3{
-    background-color: rgba(50, 75, 232, 0.125);
     width: 25%;
     padding: 10px;
     margin: 5px;
@@ -287,6 +312,12 @@ body {
     font-weight: 900;
     font-size: 16px;
     cursor: pointer;
+    border: none;
+}
+
+.genre:hover{
+    box-shadow: 1px 1px 3px rgb(255, 255, 255),
+                -1px -1px 3px rgb(255, 255, 255);
 }
 
 .hindi{
@@ -324,6 +355,11 @@ body {
     cursor: pointer;
 }
 
+.favArtistButtons .genre:hover{
+    box-shadow: 1px 1px 3px rgb(255, 255, 255),
+                -1px -1px 3px rgb(255, 255, 255);
+}
+
 .bts{
     background-image: url(./artists/bts.jpg);
     background-position: center;
@@ -347,7 +383,7 @@ body {
 }
 
 .oliviaRodrigo{
-    background-image: url(./artists/oliviaRodrigo.png);
+    background-image: url(./artists/oliviaRodrigo.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -370,10 +406,9 @@ body {
 .music-container {
     background-color: rgba(19, 36, 53, 0.4);
     display: flex;
-    /* justify-content: center; */
     padding: 20px 30px;
     position: relative;
-    margin: 300px 0px 0px 0px;
+    margin: 80px 0px 20px 0px;
     z-index: 10;
     width: 100%;
     border-radius: 20px;
@@ -390,8 +425,8 @@ body {
     background-color: #fff;
     border-radius: 50%;
     position: absolute;
-    bottom: 100%;
-    left: 50%;
+    bottom: 50px;
+    left: 50px;
     width: 20px;
     height: 20px;
     transform: translate(-50%, 50%);
@@ -432,7 +467,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 1;
-    margin: 0px 0px 0px 100px;
+    margin: 0px 0px 0px 170px;
   }
   
   /* styling the navigation buttons */
@@ -481,6 +516,7 @@ body {
   .music-info h4 {
     margin: 0;
     text-align: center;
+    text-transform: capitalize;
   }
   
   /* styling the song progress container */
@@ -501,3 +537,38 @@ body {
     width: 0%;
     transition: width 0.1s linear;
   }
+  
+/* search box */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+   
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 330px;
+    margin: 12px 10px;
+    overflow: auto;
+    z-index: 1;
+
+    backdrop-filter: blur(2px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+  }
+  
+  .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown a:hover {
+    background-color: #ddd;
+}
+  
+  .show {display: block;}

@@ -16,12 +16,20 @@
             <div class="div1">
                 <div class="search">
                     <i class="bi bi-search"></i>
-                    <input type="text" placeholder="Search Music...">
+                    <input type="text" id="searchbar" onkeyup="filterFunction()" onclick="myFunction()" placeholder="Search Music...">
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="#">All I Want</a>
+                        <a href="#">PILLOWTALK</a>
+                        <a href="#">Lily</a>
+                        <a href="#">Steal My Girl</a>
+                        <a href="#">Believer</a>
+                        <a href="#">FAKE LOVE</a>
+                        <a href="#">Drivers License</a>
+                    </div>
                 </div>
                 <div class="playlist">
                     <h4 class="active"><span></span><i class="bi bi-music-note-beamed"></i> Playlist</h4>
-                    <h4><span></span><i class="bi bi-music-note-beamed"></i> Last Listening</h4>
-                    <h4><span></span><i class="bi bi-music-note-beamed"></i> Recommended</h4>
+                    <h4 id="lastListening"><span></span><i class="bi bi-music-note-beamed"></i> Last Listening</h4>
                 </div>
                 <div class="menu_song">
                     <li class="songItem">
@@ -164,11 +172,7 @@
 
             <div class="div2">
                 <div class="title">Groovy</div>
-                <div class="wave">
-                    <div class="wave1"></div>
-                    <div class="wave1"></div>
-                    <div class="wave1"></div>
-                </div>
+                <div id="albumCover"></div>
 
                 <div class="music-container" id="music-container">
                     <div class="music-info">
@@ -177,9 +181,9 @@
                         <div class="progress" id="progress"></div>
                       </div>
                     </div>
-                    <audio src="[SPOTIFY-DOWNLOADER.COM] Midnight Rain.mp3" id="audio"></audio>
+                    <audio src="Midnight Rain.mp3" id="audio"></audio>
                     <div class="img-container">
-                      <img src="./artists/Midnight  Rain.jpg" alt="music-cover" id="cover" />
+                      <img src="./artists/taylorSwift.jpg" alt="music-cover" id="cover" />
                     </div>
                     <div class="navigation">
                       <button id="prev" class="action-btn">
@@ -192,7 +196,13 @@
                         <i class="fas fa-forward"></i>
                       </button>
                     </div>
-                  </div>
+                    <div class="slider_container">
+                        <i class="fa fa-volume-down"></i>
+                        <input type="range" min="1" max="100"
+                          value="99" class="volume_slider" onchange="setVolume()">
+                        <i class="fa fa-volume-up"></i>
+                    </div>
+                </div>
             </div>
             
             <div class="div3">
